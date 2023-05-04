@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$client = new Raven_Client('https://e8a10daf1f5c4b6dbc1398e77840afb1@o4505121571209216.ingest.sentry.io/4505121575534592');
 
 class Welcome extends CI_Controller {
 
@@ -21,5 +22,6 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('welcome_message');
+		$error_handler = new Raven_ErrorHandler($client);
 	}
 }
