@@ -19,11 +19,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$client = new Raven_Client('https://e8a10daf1f5c4b6dbc1398e77840afb1@o4505121571209216.ingest.sentry.io/4505121575534592');
+		$client = (new Raven_Client('https://e8a10daf1f5c4b6dbc1398e77840afb1@o4505121571209216.ingest.sentry.io/4505121575534592'))->install();;
 		$this->load->view('welcome_message');
 		$error_handler = new Raven_ErrorHandler($client);
+		$event_id = $client->captureException($ex);
 		$error_handler->registerExceptionHandler();
 		$error_handler->registerErrorHandler();
 		$error_handler->registerShutdownFunction();
+		
 	}
 }
